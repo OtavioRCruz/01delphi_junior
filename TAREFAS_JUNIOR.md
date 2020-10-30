@@ -1,0 +1,11 @@
+- [VISUAL] Fazer com que o software abra já maximizado;
+- [VISUAL] Criar uma tela splash;
+- [VISUAL] Criar um rodapé com alguns dados fictícios do usuário e, principalmente, um relógio com a data e hora  atualizando constantemente;
+- [VISUAL] Colocar um logotipo no cabeçalho;
+- [VISUAL] Acertar a ordem de tabulação do Cadastro de Cliente;
+- [VISUAL] No cadastro de cliente definir máscaras adequadas para os campos:
+  - NASCIMENTO
+  - TELEFONE
+  - INSCRIÇÃO FISCAL (Perceba que é o mesmo campo para CNPJ e CPF)
+- [DATABASE] - Na tela de Cadastro de Cliente faltam criar as funcionalidades de EXCLUIR e EDITAR bem como informar, no rodapé, o número do registro atual versus a quantidade de registros (exemplo: `Cliente 1 de 60`)
+- [RECURSOS] Criar arquivo de configuração, INI, para as informações de acesso ao banco de dados;

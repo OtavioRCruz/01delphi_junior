@@ -1,0 +1,13 @@
+Realizações:
+1º Software abre maximizado;
+2º Tela splash;
+3º Rodapé contem: nome da empresa, usuario ficticio, quantidade de registros na tabela de clientes, data e hora;
+4º Logotipo no cabeçalho;
+5º Tabulação ajustada da tela de cadastro de clientes;
+6º Mascara criada para os campos: Nascimento, Telefone, Inscrição Fiscal, CEP;
+7º Botões criados: Excluir, Limpar e Editar;
+8º ID_CLIENTE foi ajustado como campo auto incremental;
+9º Criei um DATA Module para melhor organização do projeto;
+10º Tabelas do banco criadas(CLIENTES, VENDAS), ambas contendo PK e FK;
+11º Para a tabela CLIENTES criei um GENERATORS e uma TRIGGER para auto incremento;
+12º Arquivo INI criado e deixado no caminho: '01delphi_junior\source\Win32\Debug\configura.ini';

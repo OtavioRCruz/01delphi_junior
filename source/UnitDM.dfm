@@ -1,0 +1,161 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 328
+  Width = 508
+  object FDGen: TFDQuery
+    Connection = FDConnection1
+    Left = 214
+    Top = 96
+  end
+  object DataSource3: TDataSource
+    DataSet = FDQuery1
+    Left = 102
+    Top = 213
+  end
+  object DataSource2: TDataSource
+    DataSet = FDQuery2
+    Left = 102
+    Top = 157
+  end
+  object FDQuery2: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select count(*) from CLIENTES')
+    Left = 31
+    Top = 149
+  end
+  object DataSource1: TDataSource
+    DataSet = FDQuery1
+    Left = 112
+    Top = 88
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Transaction = FDTransaction1
+    SQL.Strings = (
+      'SELECT *'
+      'FROM CLIENTES'
+      'order by ID_CLIENTE asc')
+    Left = 32
+    Top = 88
+    object FDQuery1ID_CLIENTE: TLargeintField
+      DisplayWidth = 10
+      FieldName = 'ID_CLIENTE'
+      Origin = 'ID_CLIENTE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQuery1NOME: TStringField
+      DisplayWidth = 100
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 100
+    end
+    object FDQuery1NASCIMENTO: TDateField
+      DisplayWidth = 11
+      FieldName = 'NASCIMENTO'
+      Origin = 'NASCIMENTO'
+      Required = True
+      EditMask = '!99/99/9999;1;_'
+    end
+    object FDQuery1EMAIL: TStringField
+      DisplayWidth = 150
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      Required = True
+      Size = 150
+    end
+    object FDQuery1END_TIPO_LOGRADOURO: TStringField
+      DisplayWidth = 21
+      FieldName = 'END_TIPO_LOGRADOURO'
+      Origin = 'END_TIPO_LOGRADOURO'
+      Required = True
+    end
+    object FDQuery1END_NOME_LOGRADOURO: TStringField
+      DisplayWidth = 150
+      FieldName = 'END_NOME_LOGRADOURO'
+      Origin = 'END_NOME_LOGRADOURO'
+      Required = True
+      Size = 150
+    end
+    object FDQuery1END_NUMERO: TStringField
+      DisplayWidth = 11
+      FieldName = 'END_NUMERO'
+      Origin = 'END_NUMERO'
+      Required = True
+      Size = 10
+    end
+    object FDQuery1END_COMPLEMENTO: TStringField
+      DisplayWidth = 50
+      FieldName = 'END_COMPLEMENTO'
+      Origin = 'END_COMPLEMENTO'
+      Size = 50
+    end
+    object FDQuery1END_BAIRRO: TStringField
+      DisplayWidth = 150
+      FieldName = 'END_BAIRRO'
+      Origin = 'END_BAIRRO'
+      Required = True
+      Size = 150
+    end
+    object FDQuery1END_CIDADE: TStringField
+      DisplayWidth = 150
+      FieldName = 'END_CIDADE'
+      Origin = 'END_CIDADE'
+      Required = True
+      Size = 150
+    end
+    object FDQuery1END_UF: TStringField
+      DisplayWidth = 6
+      FieldName = 'END_UF'
+      Origin = 'END_UF'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object FDQuery1PESSOA: TStringField
+      DisplayWidth = 6
+      FieldName = 'PESSOA'
+      Origin = 'PESSOA'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQuery1INSCRICAO_FISCAL: TStringField
+      DisplayWidth = 18
+      FieldName = 'INSCRICAO_FISCAL'
+      Origin = 'INSCRICAO_FISCAL'
+      Size = 18
+    end
+    object FDQuery1TELEFONE: TStringField
+      DisplayWidth = 14
+      FieldName = 'TELEFONE'
+      Origin = 'TELEFONE'
+      EditMask = '!\(99\)90000-0000;1;_'
+      Size = 14
+    end
+    object FDQuery1END_CEP: TStringField
+      DisplayWidth = 9
+      FieldName = 'END_CEP'
+      Origin = 'END_CEP'
+      EditMask = '00000\-999;1;_'
+      Size = 9
+    end
+  end
+  object FDTransaction1: TFDTransaction
+    Connection = FDConnection1
+    Left = 112
+    Top = 16
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Database=F:\01delphi_junior\database\TESTE_PRATICO.FDB'
+      'DriverID=FB')
+    LoginPrompt = False
+    Left = 33
+    Top = 17
+  end
+end

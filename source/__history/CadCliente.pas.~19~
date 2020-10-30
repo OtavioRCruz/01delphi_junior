@@ -1,0 +1,246 @@
+unit CadCliente;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  Vcl.ExtCtrls,
+  Data.DB,
+  Vcl.StdCtrls,
+  Vcl.Mask,
+  Vcl.DBCtrls,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfCadCliente = class(TForm)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Panel1: TPanel;
+    DBNavigator1: TDBNavigator;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    GroupBox1: TGroupBox;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    Label9: TLabel;
+    DBEdit9: TDBEdit;
+    Label10: TLabel;
+    DBEdit10: TDBEdit;
+    Label11: TLabel;
+    DBEdit11: TDBEdit;
+    Label12: TLabel;
+    DBEdit12: TDBEdit;
+    Label13: TLabel;
+    DBEdit13: TDBEdit;
+    DBRadioGroup1: TDBRadioGroup;
+    Label14: TLabel;
+    DBEdit14: TDBEdit;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    DBGrid1: TDBGrid;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    Timer1: TTimer;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FDQuery1EMAILValidate(Sender: TField);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FDQuery1INSCRICAO_FISCALValidate(Sender: TField);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure DBRadioGroup1Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    Function ProximoID(Generator: String): Integer;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fCadCliente: TfCadCliente;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  Main,
+  System.RegularExpressions,
+  InscricaoFiscal, UnitDM;
+
+procedure TfCadCliente.Button1Click(Sender: TObject);
+begin
+  DM.FDQuery1.Append;
+  DM.FDQuery1.Post;
+  DM.FDQuery1.Close;
+  DM.FDQuery1.Open;
+end;
+
+procedure TfCadCliente.Button2Click(Sender: TObject);
+begin
+  DM.FDQuery1.Cancel;
+end;
+
+procedure TfCadCliente.Button3Click(Sender: TObject);
+begin
+  if DM.FDQuery1.State=dsInsert then
+  DM.FDQuery1ID_CLIENTE.AsInteger:=ProximoID('INC_CLIENTES');
+
+  DM.FDQuery1.Post;
+
+end;
+
+procedure TfCadCliente.Button4Click(Sender: TObject);
+begin
+  DM.FDQuery1.Edit;
+end;
+
+procedure TfCadCliente.Button5Click(Sender: TObject);
+begin
+ DM.FDQuery1.Delete;
+end;
+
+procedure TfCadCliente.Button6Click(Sender: TObject);
+begin
+  DBEdit1.Clear;
+  DBEdit2.Clear;
+  DBEdit3.Clear;
+  DBEdit4.Clear;
+  DBEdit5.Clear;
+  DBEdit6.Clear;
+  DBEdit7.Clear;
+  DBEdit8.Clear;
+  DBEdit9.Clear;
+  DBEdit10.Clear;
+  DBEdit11.Clear;
+  DBEdit12.Clear;
+  DBEdit13.Clear;
+  DBEdit14.Clear;
+end;
+
+
+
+procedure TfCadCliente.DBRadioGroup1Click(Sender: TObject);
+begin
+  case DBRadioGroup1.ItemIndex of
+    0 :
+    begin
+    DM.FDQuery1.Edit;
+    DBEdit14.Field.Clear;
+    DBEdit14.SetFocus;
+    DBEdit14.Field.EditMask := '!999.999.999-99;0;_';      //14
+    end;
+    1 :
+    begin
+    DM.FDQuery1.Edit;
+    DBEdit14.Field.Clear;
+    DBEdit14.SetFocus;
+    DBEdit14.Field.EditMask := '!99.999.999/9999-99;0;_';  //18
+    end;
+  end;
+end;
+
+procedure TfCadCliente.FDQuery1EMAILValidate(Sender: TField);
+var
+  rRegex: TRegex;
+  bRet  : Boolean;
+begin
+  bRet := rRegex.IsMatch(Sender.AsString, '^[^@]+@[^.]+\.com\.br');
+  if not bRet then
+    raise Exception.Create('e-Mail inválido!');
+end;
+
+procedure TfCadCliente.FDQuery1INSCRICAO_FISCALValidate(Sender: TField);
+var
+  oValidador: TInscricaoFiscal;
+begin
+  oValidador := nil;
+
+  try
+    if DM.FDQuery1PESSOA.Value = 'F' then
+    begin
+      oValidador := TCPF.Create;
+    end;
+
+    if DM.FDQuery1PESSOA.Value = 'J' then
+    begin
+      oValidador := TCNPJ.Create;
+    end;
+
+    if not Assigned(oValidador) then
+      raise Exception.Create('O tipo de pessoa não foi definido');
+
+    if Assigned(oValidador) and not oValidador.DocumentoValido(Sender.AsString) then
+      raise Exception.Create('Documento inválido');
+  finally
+    if Assigned(oValidador) then
+      oValidador.Free;
+  end;
+end;
+
+procedure TfCadCliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DM.FDQuery1.Close;
+  DM.FDQuery2.Close;
+end;
+
+procedure TfCadCliente.FormCreate(Sender: TObject);
+begin
+  DM.FDQuery1.Open;
+  DM.FDQuery2.Open;
+end;
+
+function TfCadCliente.ProximoID(Generator: String): Integer;
+begin
+  DM.FDGen.Close;
+  DM.FDGen.SQL.Clear;
+  DM.FDGen.SQL.Add('select Gen_id('+ GENERATOR +',1) as ID_ATUAL FROM RDB$DATABASE');
+  DM.FDGen.Open;
+  Result:=DM.FDGen.FieldByName('ID_ATUAL').AsInteger;
+  DM.FDGen.Close;
+end;
+
+procedure TfCadCliente.Timer1Timer(Sender: TObject);
+begin
+  DM.FDQuery2.Refresh;
+  fMain.StatusBar1.Panels[2].text := 'Cliente: '+ DBText2.Caption +' de ' + DBText1.Caption;
+end;
+
+end.

@@ -1,0 +1,143 @@
+object fMain: TfMain
+  Left = 0
+  Top = 0
+  Caption = 'Corretora ACME'
+  ClientHeight = 732
+  ClientWidth = 981
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Segoe UI Light'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 21
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 981
+    Height = 89
+    Align = alTop
+    BevelInner = bvLowered
+    Caption = 'Panel1'
+    Color = clTeal
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Top = 8
+      Width = 167
+      Height = 30
+      Caption = 'Corretora ACME'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Segoe UI Black'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 89
+    Width = 981
+    Height = 643
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'Panel2'
+    ShowCaption = False
+    TabOrder = 1
+    object Panel3: TPanel
+      Left = 0
+      Top = 0
+      Width = 153
+      Height = 643
+      Align = alLeft
+      BevelInner = bvLowered
+      Caption = 'Panel3'
+      Color = clSilver
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 0
+      object Button1: TButton
+        Left = 8
+        Top = 6
+        Width = 131
+        Height = 131
+        Action = ActionCadCliente
+        TabOrder = 0
+      end
+      object Button2: TButton
+        Left = 8
+        Top = 143
+        Width = 131
+        Height = 131
+        Action = ActionCadVenda
+        TabOrder = 1
+      end
+      object Button3: TButton
+        Left = 8
+        Top = 280
+        Width = 131
+        Height = 131
+        Action = ActionCadVenda
+        Caption = 'Cadastro de Usu'#225'rios'
+        TabOrder = 2
+      end
+      object Button4: TButton
+        Left = 8
+        Top = 417
+        Width = 131
+        Height = 131
+        Action = ActionListarArquivos
+        TabOrder = 3
+      end
+    end
+    object PanelWorkArea: TPanel
+      Left = 153
+      Top = 0
+      Width = 828
+      Height = 643
+      Align = alClient
+      BevelOuter = bvNone
+      Caption = 'PanelWorkArea'
+      Color = clGray
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 209
+    Top = 17
+    object ActionCadCliente: TAction
+      Caption = 'Cadastro de Cliente'
+      OnExecute = ActionCadClienteExecute
+    end
+    object ActionCadVenda: TAction
+      Caption = 'Registro de Vendas'
+    end
+    object ActionListarArquivos: TAction
+      Caption = 'Listagem de Arquivos'
+      OnExecute = ActionListarArquivosExecute
+    end
+  end
+  object ImageList1: TImageList
+    Left = 288
+    Top = 16
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=FB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Database=localhost:E:\database_tex\teste_pratico.fdb')
+    Connected = True
+    LoginPrompt = False
+    Left = 377
+    Top = 17
+  end
+end
